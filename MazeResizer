@@ -1,0 +1,24 @@
+public class MazeResizer {
+
+    public static int[][] settingMaze(int[][] originalMaze) {
+        int cutToSize = 9;
+        int[][] cutToMaze = new int[cutToSize][cutToSize];
+        for (int i = 1; i <= cutToSize; i++) {
+            System.arraycopy(originalMaze[i], 1, cutToMaze[i - 1], 0, cutToSize);
+        }
+
+        int finalSize = 10;
+        int[][] boundedMaze = new int[finalSize][finalSize];
+        
+        for (int i = 0; i < finalSize; i++) {
+            for (int j = 0; j < finalSize; j++) {
+                if (i == 0 || j == 0 || i == finalSize - 1 || j == finalSize - 1) {
+                    boundedMaze[i][j] = 1;
+                } else {
+                    boundedMaze[i][j] = cutToMaze[i - 1][j - 1]; 
+                }
+            }
+        }
+        return boundedMaze;
+    }
+}
